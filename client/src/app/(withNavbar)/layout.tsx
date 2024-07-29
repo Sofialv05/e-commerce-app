@@ -6,7 +6,7 @@ export default function Layout({
   return (
     <div>
       <Navbar />
-      {children}
+      <div className="flex min-h-screen px-20">{children}</div>
     </div>
   );
 }

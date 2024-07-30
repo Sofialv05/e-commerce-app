@@ -81,6 +81,9 @@ export default function Navbar() {
             </ul>
           </div>
         </div>
+        <div className="">
+          <Search />
+        </div>
         <div className="navbar-end">
           <ThemeController />
 

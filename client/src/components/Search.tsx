@@ -1,6 +1,6 @@
 export default function Search() {
   return (
-    <div className="form-control">
+    <div className="form-control w-full">
       <input
         type="text"
         placeholder="Search"

@@ -1,7 +1,7 @@
 export default function Wishlist() {
   return (
-    <div>
-      <h1>Wishlish page</h1>
-    </div>
+    <main>
+      <h1>Wishlist page</h1>
+    </main>
   );
 }

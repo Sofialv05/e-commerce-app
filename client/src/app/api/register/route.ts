@@ -1,13 +1,23 @@
-import { NextResponse } from "next/server";
+import UserModel from "@/db/models/User";
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-export async function POST() {
-  const res = await fetch("https://data.mongodb-api.com/...", {
-    headers: {
-      "Content-Type": "application/json",
-      "API-Key": process.env.DATA_API_KEY,
-    },
-  });
-  const data = await res.json();
-  console.log(data);
-  return NextResponse.json({ message: "register success" }, { status: 201 });
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const result = await UserModel.addNewUser(body);
+    return NextResponse.json({ message: "register success" }, { status: 201 });
+  } catch (error) {
+    console.log(error);
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { message: error.errors[0].message },
+        { status: 400 }
+      );
+    }
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }

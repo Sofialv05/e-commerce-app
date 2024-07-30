@@ -4,9 +4,9 @@ export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div>
+    <div className="h-max">
       <Navbar />
-      <div className="flex min-h-screen px-20">{children}</div>
+      <div className="flex max-h-max px-20 pt-10">{children}</div>
     </div>
   );
 }

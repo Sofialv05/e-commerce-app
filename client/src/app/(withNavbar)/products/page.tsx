@@ -68,7 +68,7 @@ export default function Products({ product }: { product: ProductData }) {
                   </p>
                 }
               >
-                <div className="grid grid-cols-4 gap-5">
+                <div className="grid grid-cols-4 p-10 gap-5">
                   {data.map((product, index) => {
                     return <Card key={index} />;
                   })}

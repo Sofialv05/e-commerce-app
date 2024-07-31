@@ -23,8 +23,8 @@ class UserModel {
     password: string;
   }) {
     UserSchema.parse(newUser);
-    const usersTable = DB.collection("Users");
-    const userUsername = await usersTable.findOne({
+    const collection = DB.collection("Users");
+    const userUsername = await collection.findOne({
       username: newUser.username,
     });
 
@@ -32,14 +32,14 @@ class UserModel {
       throw new Error("username is already in use");
     }
 
-    const userEmail = await usersTable.findOne({
+    const userEmail = await collection.findOne({
       email: newUser.email,
     });
     if (!userEmail) {
       throw new Error("email is already in use");
     }
 
-    return usersTable.insertOne({
+    return collection.insertOne({
       name: newUser.name,
       username: newUser.username,
       email: newUser.email,
@@ -50,13 +50,13 @@ class UserModel {
   }
   static async login(user: { email: string; password: string }) {
     const { email, password } = user;
-    const usersTable = DB.collection<User>("Users");
+    const collection = DB.collection<User>("Users");
 
     if (!email || !password) {
       throw new Error("email/password is required");
     }
 
-    const findUser = await usersTable.findOne({
+    const findUser = await collection.findOne({
       email,
     });
     if (!findUser) {
@@ -71,8 +71,8 @@ class UserModel {
 
     const accessToken = sign(
       {
-        email,
         _id: findUser._id,
+        email,
       },
       process.env.SECRET_KEY as string
     );

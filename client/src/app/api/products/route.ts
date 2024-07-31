@@ -1,13 +1,16 @@
+import ProductModel from "@/db/models/Product";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const res = await fetch("https://data.mongodb-api.com/...", {
-    headers: {
-      "Content-Type": "application/json",
-      "API-Key": process.env.DATA_API_KEY,
-    },
-  });
-  const data = await res.json();
-  console.log(data);
-  return NextResponse.json({ data });
+  try {
+    const data = await ProductModel.findAllProducts();
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }

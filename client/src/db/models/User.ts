@@ -1,6 +1,8 @@
 import { z } from "zod";
 import DB from "../connection";
 import { hashSync, compareSync } from "bcryptjs";
+import { sign, verify } from "jsonwebtoken";
+import { User } from "@/interfaces/User";
 
 const UserSchema = z.object({
   name: z.string(),
@@ -26,14 +28,14 @@ class UserModel {
       username: newUser.username,
     });
 
-    if (userUsername) {
+    if (!userUsername) {
       throw new Error("username is already in use");
     }
 
     const userEmail = await usersTable.findOne({
       email: newUser.email,
     });
-    if (userEmail) {
+    if (!userEmail) {
       throw new Error("email is already in use");
     }
 
@@ -45,6 +47,37 @@ class UserModel {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+  }
+  static async login(user: { email: string; password: string }) {
+    const { email, password } = user;
+    const usersTable = DB.collection<User>("Users");
+
+    if (!email || !password) {
+      throw new Error("email/password is required");
+    }
+
+    const findUser = await usersTable.findOne({
+      email,
+    });
+    if (!findUser) {
+      throw new Error("email has not been registered");
+    }
+
+    const isValidPassword = compareSync(password, findUser.password);
+
+    if (!isValidPassword) {
+      throw new Error("invalid password");
+    }
+
+    const accessToken = sign(
+      {
+        email,
+        _id: findUser._id,
+      },
+      process.env.SECRET_KEY as string
+    );
+
+    return { accessToken };
   }
 }
 

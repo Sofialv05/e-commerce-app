@@ -13,7 +13,7 @@ export default function DetailCarousel() {
           data-carousel-item="active"
         >
           <img
-            src="/docs/images/carousel/carousel-1.svg"
+            src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnVybml0dXJlfGVufDB8fDB8fHww"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
             alt="..."
           />
@@ -21,7 +21,7 @@ export default function DetailCarousel() {
         {/* Item 2 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item="">
           <img
-            src="/docs/images/carousel/carousel-2.svg"
+            src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnVybml0dXJlfGVufDB8fDB8fHww"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
             alt="..."
           />
@@ -29,7 +29,7 @@ export default function DetailCarousel() {
         {/* Item 3 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item="">
           <img
-            src="/docs/images/carousel/carousel-3.svg"
+            src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnVybml0dXJlfGVufDB8fDB8fHww"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
             alt="..."
           />
@@ -45,7 +45,7 @@ export default function DetailCarousel() {
         {/* Item 5 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item="">
           <img
-            src="/docs/images/carousel/carousel-5.svg"
+            src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnVybml0dXJlfGVufDB8fDB8fHww"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
             alt="..."
           />

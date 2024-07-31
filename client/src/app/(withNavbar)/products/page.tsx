@@ -62,9 +62,11 @@ export default function Products({ product }: { product: ProductData }) {
                 next={loadMoreData}
                 hasMore={true}
                 loader={<h4>Loading...</h4>}
-                scrollableTarget="scrollableDiv"
-                style={{ display: "flex", flexDirection: "column-reverse" }}
-                inverse={true}
+                endMessage={
+                  <p style={{ textAlign: "center" }}>
+                    <b>Yay! You have seen it all</b>
+                  </p>
+                }
               >
                 <div className="grid grid-cols-4 gap-5">
                   {data.map((product, index) => {

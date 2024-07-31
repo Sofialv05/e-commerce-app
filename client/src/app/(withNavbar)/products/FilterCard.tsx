@@ -1,3 +1,5 @@
+"use client";
+
 export default function FilterCard() {
   return (
     <div className="col-span-3 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">

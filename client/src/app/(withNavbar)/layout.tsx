@@ -6,7 +6,7 @@ export default function Layout({
   return (
     <div className="h-max">
       <Navbar />
-      <div className="flex max-h-max px-20 pt-10">{children}</div>
+      <div className="flex max-h-max px-20 py-10">{children}</div>
     </div>
   );
 }

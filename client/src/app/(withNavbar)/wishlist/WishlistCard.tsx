@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { ProductData } from "@/interfaces/ProductData";
 
-export default function Card() {
+export default function WishlistCard() {
   return (
     <Link
-      href={"/products/"}
+      href={"/products/1"}
       className="card rounded-md bg-base-200 w-auto shadow-xl"
     >
       <figure className="px-10 pt-10">
@@ -18,7 +17,7 @@ export default function Card() {
             Details
           </button>
           <button className="btn w-full bg-gray-500 text-white hover:text-black hover:bg-gray-400">
-            Add to wishlist
+            Remove from wishlist
           </button>
         </div>
       </div>

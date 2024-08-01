@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import Card from "@/components/Card";
+import Card from "./Card";
 import { ProductData } from "@/interfaces/ProductData";
 import FilterCard from "./FilterCard";
 
 async function getData(page: number): Promise<ProductData[]> {
-  const res = await fetch(`http://localhost:3001/products`, {
+  const res = await fetch(`http://localhost:3000/api/products`, {
     cache: "no-store",
   });
-
+  console.log(res);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -70,7 +70,7 @@ export default function Products({ product }: { product: ProductData }) {
               >
                 <div className="grid grid-cols-4 p-10 gap-5">
                   {data.map((product, index) => {
-                    return <Card key={index} />;
+                    return <Card key={index} product={product} />;
                   })}
                 </div>
               </InfiniteScroll>

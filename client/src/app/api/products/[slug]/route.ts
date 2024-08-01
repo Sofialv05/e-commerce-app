@@ -1,11 +1,22 @@
 import ProductModel from "@/db/models/Product";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { slug: string } }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const slug = searchParams.get("slug");
-    const data = await ProductModel.findOneProduct(slug as string);
+    // const test = new URL(request.url);
+    // const slug = searchParams.get("slug" as string) as string;
+    // console.log(slug, "<<<<<<<<<<<");
+    // console.log(params, "<<<<<<<<<<<");
+    if (!params.slug) {
+      return NextResponse.json(
+        { message: "Slug parameter is missing" },
+        { status: 400 }
+      );
+    }
+    const data = await ProductModel.findOneProduct(params.slug);
 
     return NextResponse.json(data);
   } catch (error) {

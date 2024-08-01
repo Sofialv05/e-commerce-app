@@ -1,4 +1,3 @@
-import { ProductData } from "@/interfaces/ProductData";
 import DB from "../connection";
 
 interface Product {

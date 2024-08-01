@@ -8,6 +8,6 @@ export interface ProductData {
   tags: string[];
   thumbnail: string;
   images: string[];
-  createdAt: string;
-  updatadAt: string;
+  createdAt: Date;
+  updatadAt: Date;
 }

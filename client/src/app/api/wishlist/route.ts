@@ -24,6 +24,10 @@ export async function POST(request: NextRequest) {
     const body: { productId: string } = await request.json();
     const reqHeaders = headers();
     const userId = reqHeaders.get("x-user-id") as string;
+    console.log(body.productId);
+    if (!body.productId) {
+      return;
+    }
     const result = await WishlistModel.addWishlist({
       userId,
       productId: body.productId,
@@ -32,24 +36,6 @@ export async function POST(request: NextRequest) {
       { message: "success add an item to the wishlist" },
       { status: 201 }
     );
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function DELETE(request: NextRequest) {
-  try {
-    const body = await request.json();
-
-    const result = await WishlistModel.removeWishlist(body);
-
-    return NextResponse.json({
-      message: "Success delete an item from the wishlist",
-    });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

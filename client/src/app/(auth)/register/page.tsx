@@ -18,11 +18,19 @@ export default function Register() {
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // fetch(apiurl,{method, body: JSON.stringify(form), headers: 'Content-Type': 'application/json'})
-    // .then((res)=> {
-    // res.json()})
-    // .then((data)=> {
-    // console.log(data)})
+    fetch("http://localhost:3000/api/register", {
+      method: "POST",
+      body: JSON.stringify(form),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
@@ -35,6 +43,7 @@ export default function Register() {
           <input
             type="text"
             value={form.name}
+            name="name"
             placeholder="name"
             className="input input-bordered w-full max-w-xs"
             onChange={inputHandler}
@@ -42,6 +51,7 @@ export default function Register() {
           <input
             type="text"
             value={form.username}
+            name="username"
             placeholder="username"
             className="input input-bordered w-full max-w-xs"
             onChange={inputHandler}
@@ -49,6 +59,7 @@ export default function Register() {
           <input
             type="email"
             value={form.email}
+            name="email"
             placeholder="email"
             className="input input-bordered w-full max-w-xs"
             onChange={inputHandler}
@@ -56,13 +67,14 @@ export default function Register() {
           <input
             type="password"
             value={form.password}
+            name="password"
             placeholder="password"
             className="input input-bordered w-full max-w-xs"
             onChange={inputHandler}
           />
-          <Link href={"/login"} type="submit" className="btn">
+          <button type="submit" className="btn">
             Create an account
-          </Link>
+          </button>
         </form>
         <div>
           <Link href={"/login"} className="ext-sm font-light text-gray-500 ">

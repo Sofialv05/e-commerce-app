@@ -10,7 +10,7 @@ const UserSchema = z.object({
   email: z.string().min(1, { message: "email is required" }).email({
     message: "Invalid email format",
   }),
-  passowrd: z
+  password: z
     .string()
     .min(5, { message: "password must be at least 5 characters" }),
 });
@@ -28,14 +28,14 @@ class UserModel {
       username: newUser.username,
     });
 
-    if (!userUsername) {
+    if (userUsername) {
       throw new Error("username is already in use");
     }
 
     const userEmail = await collection.findOne({
       email: newUser.email,
     });
-    if (!userEmail) {
+    if (userEmail) {
       throw new Error("email is already in use");
     }
 

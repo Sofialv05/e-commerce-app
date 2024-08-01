@@ -20,6 +20,11 @@ class ProductModel {
 
     return collection.find().toArray();
   }
+  static async findOneProduct(slug: string) {
+    const collection = DB.collection<Product>("Products");
+
+    return collection.findOne({ slug });
+  }
 }
 
 export default ProductModel;

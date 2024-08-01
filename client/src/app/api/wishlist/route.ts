@@ -1,9 +1,13 @@
 import WishlistModel from "@/db/models/Wishlist";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const data = await WishlistModel.findAllWishlists();
+    const reqHeaders = headers();
+    const userId = reqHeaders.get("x-user-id") as string;
+    console.log(userId);
+    const data = await WishlistModel.findAllWishlists(userId);
 
     return NextResponse.json(data);
   } catch (error) {
@@ -17,8 +21,13 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const result = await WishlistModel.addWishlist(body);
+    const body: { productId: string } = await request.json();
+    const reqHeaders = headers();
+    const userId = reqHeaders.get("x-user-id") as string;
+    const result = await WishlistModel.addWishlist({
+      userId,
+      productId: body.productId,
+    });
     return NextResponse.json(
       { message: "success add an item to the wishlist" },
       { status: 201 }

@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  console.log("testtt");
+  //   console.log("testtt");
   const cookieToken = cookies().get("accessToken");
   if (!cookieToken) {
     return NextResponse.redirect(new URL("/login", request.url));
@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
     cookieToken.value,
     jwtSecret
   );
-  console.log(payload);
+  //   console.log(payload);
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-user-id", payload._id);

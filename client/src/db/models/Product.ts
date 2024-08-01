@@ -10,8 +10,8 @@ interface Product {
   tags: string[];
   thumbnail: string;
   images: string[];
-  createdAt: string;
-  updatadAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 class ProductModel {
@@ -25,6 +25,28 @@ class ProductModel {
 
     return collection.findOne({ slug });
   }
+  // static async insertAll(
+  //   datas: {
+  //     name: string;
+  //     slug: string;
+  //     description: string;
+  //     excerpt: string;
+  //     price: number;
+  //     tags: string[];
+  //     thumbnail: string;
+  //     images: string[];
+  //   }[]
+  // ) {
+  //   const collection = DB.collection<Product>("Products");
+  //   for (let data of datas) {
+  //     let result = collection.insertOne({
+  //       ...data,
+  //       createdAt: new Date(),
+  //       updatedAt: new Date(),
+  //     });
+  //     // console.log(data);
+  //   }
+  // }
 }
 
 export default ProductModel;

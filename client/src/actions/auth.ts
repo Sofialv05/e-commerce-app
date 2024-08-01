@@ -15,7 +15,7 @@ export const loginAction = async (formData: FormData) => {
   });
 
   const data = (await result.json()) as { accessToken: string };
-  console.log(data);
+  // console.log(data);
   const cookieStore = cookies();
   cookieStore.set("accessToken", data.accessToken);
 

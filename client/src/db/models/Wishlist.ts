@@ -9,7 +9,7 @@ interface Wishlist {
 }
 
 class WishlistModel {
-  static async findAllWishlists() {
+  static async findAllWishlists(userId: string) {
     const collection = DB.collection<Wishlist>("Wishlists");
 
     return collection.find().toArray();

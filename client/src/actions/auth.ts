@@ -1,5 +1,8 @@
 "use server";
 
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
 export const loginAction = async (formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
@@ -10,4 +13,11 @@ export const loginAction = async (formData: FormData) => {
       "Content-Type": "application/json",
     },
   });
+
+  const data = (await result.json()) as { accessToken: string };
+  console.log(data);
+  const cookieStore = cookies();
+  cookieStore.set("accessToken", data.accessToken);
+
+  return redirect("/");
 };

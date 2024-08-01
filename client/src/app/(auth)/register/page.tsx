@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function Register() {
+  const router = useRouter();
   const [form, setForm] = useState({
     name: "",
     username: "",
@@ -30,6 +32,7 @@ export default function Register() {
       })
       .then((data) => {
         console.log(data);
+        router.push("/login");
       });
   };
 

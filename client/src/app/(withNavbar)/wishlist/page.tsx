@@ -1,7 +1,6 @@
 import { WishlistData } from "@/interfaces/WishlistData";
 import WishlistCard from "./WishlistCard";
 import { cookies } from "next/headers";
-import { useEffect } from "react";
 
 export default async function Wishlist({
   wishlist,

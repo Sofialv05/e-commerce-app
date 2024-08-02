@@ -1,61 +1,50 @@
-"use client";
-import { useState, useEffect } from "react";
+// "use client";
 import { ProductData } from "@/interfaces/ProductData";
-import DetailCarousel from "./DetailCarousel";
 import formatCurrency from "@/helpers/formatCurrency";
-import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { handleLike } from "@/actions/addWishlist";
+import type { Metadata, ResolvingMetadata } from "next";
 
-export default function Detail({ params }: { params: { slug: string } }) {
-  const router = useRouter();
-  const [data, setData] = useState<ProductData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(
-          `http://localhost:3000/api/products/${params.slug}`,
-          {
-            cache: "no-store",
-          }
-        );
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const productData: ProductData = await res.json();
-        setData(productData);
-      } catch (error) {
-        setError("Failed to load product details.");
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, [params.slug]);
-
-  const handleLike = async (productId: string) => {
-    try {
-      const res = await fetch("http://localhost:3000/api/wishlist", {
-        method: "POST",
-        body: JSON.stringify(productId),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!res.ok) {
-        throw new Error("Failed to add the product to wishlist");
-      }
-      await res.json();
-      router.refresh();
-    } catch (error) {
-      console.error(error);
-    }
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // console.log(params);
+  const product: ProductData = await fetch(
+    `http://localhost:3000/api/products/${params.slug}`
+  ).then((res) => res.json());
+  // console.log(product);
+  return {
+    title: product.name,
+    description: product.description,
   };
+}
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-  if (!data) return <p>No product found</p>;
+export default async function Detail({ params }: { params: { slug: string } }) {
+  async function getData() {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/products/${params.slug}`,
+        {
+          cache: "no-store",
+        }
+      );
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const result = await res.json();
+      return result;
+    } catch (error) {
+      console.error("Failed to load product data", error);
+    }
+  }
+
+  const data = await getData();
 
   return (
     <main className="w-full shadow-lg rounded-md bg-gray-100 mx-20">
@@ -71,7 +60,7 @@ export default function Detail({ params }: { params: { slug: string } }) {
                 />
               </div>
               <div className="mt-4 col-span-1 flex flex-col justify-center gap-4 mx-auto">
-                {data.images.map((image, index) => (
+                {data.images.map((image: string, index: number) => (
                   <div
                     key={index}
                     className="w-[120px] h-[120px] flex items-center justify-center p-4 cursor-pointer"
@@ -94,12 +83,14 @@ export default function Detail({ params }: { params: { slug: string } }) {
               </p>
             </div>
             <div className="inline-block w-full my-12">
-              <button
-                onClick={() => handleLike(data._id)}
-                className="btn w-full mx-auto"
+              <form
+                action={async () => {
+                  "use server";
+                  handleLike(data._id);
+                }}
               >
-                Add to Wishlist
-              </button>
+                <button className="btn w-full mx-auto">Add to Wishlist</button>
+              </form>
             </div>
             <div className="mt-8">
               <h3 className="text-xl font-semibold text-white">

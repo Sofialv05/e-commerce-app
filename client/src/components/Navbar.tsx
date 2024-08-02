@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemeController from "./ThemeController";
-import Search from "../app/(withNavbar)/products/Search";
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

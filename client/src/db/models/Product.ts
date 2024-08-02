@@ -24,7 +24,7 @@ class ProductModel {
     const collection = DB.collection<Product>("Products");
 
     const skipData = (page - 1) * size;
-    // console.log(skipData, "<<<<<<<<<<<<<<<<<<<<<<");
+
     let pipeline: PipelineStage[] = [
       {
         $skip:

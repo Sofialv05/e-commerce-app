@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { ProductData } from "@/interfaces/ProductData";
 import formatCurrency from "@/helpers/formatCurrency";
-import { revalidatePath } from "next/cache";
 import { redirect, useRouter } from "next/navigation";
 
 export default function Card({ product }: { product: ProductData }) {

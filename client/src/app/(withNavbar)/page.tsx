@@ -37,14 +37,7 @@ export default function Home() {
         <hr />
       </div>
 
-      <div className="grid grid-cols-5 gap-5">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </div>
+      <div className="grid grid-cols-5 gap-5"></div>
       <div className="w-full bg-gray-500 my-10 py-10 h-30">
         <h1 className="text-xl text-center">About Us</h1>
       </div>

@@ -7,6 +7,11 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const reqHeaders = headers();
+    const userId = reqHeaders.get("x-user-id") as string;
+    if (!userId) {
+      return NextResponse.json({ message: "Invalid user" }, { status: 401 });
+    }
     if (!params.id) {
       return NextResponse.json(
         { message: "Id parameter is missing" },
@@ -14,7 +19,7 @@ export async function DELETE(
       );
     }
 
-    const result = await WishlistModel.removeWishlist(params.id);
+    const result = await WishlistModel.removeWishlist(params.id, userId);
     // console.log(result);
     if (result.acknowledged) {
       return NextResponse.json({

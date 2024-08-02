@@ -80,10 +80,18 @@ class WishlistModel {
       updatedAt: new Date(),
     });
   }
-  static async removeWishlist(id: string) {
+  static async removeWishlist(id: string, userId: string) {
     const collection = DB.collection<Wishlist>("Wishlists");
 
-    return collection.deleteOne({ _id: new ObjectId(id) });
+    return collection.deleteOne({
+      _id: new ObjectId(id),
+      userId: new ObjectId(userId),
+    });
+  }
+  static async findOneWishlist(id: string) {
+    const collection = DB.collection<Wishlist>("Wishlists");
+
+    return collection.findOne({ _id: new ObjectId(id) });
   }
 }
 

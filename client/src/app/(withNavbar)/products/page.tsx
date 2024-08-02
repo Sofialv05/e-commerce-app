@@ -1,40 +1,71 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import Card from "./Card";
-import { ProductData } from "@/interfaces/ProductData";
+import { ProductData, ProductResult } from "@/interfaces/ProductData";
 import FilterCard from "./FilterCard";
-
-async function getData(page: number): Promise<ProductData[]> {
-  const res = await fetch(`http://localhost:3000/api/products`, {
-    cache: "no-store",
-  });
-  // console.log(res);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 export default function Products({ product }: { product: ProductData }) {
   const [data, setData] = useState<ProductData[]>([]);
-  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [limitPage, setLimitPage] = useState("8");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-  useEffect(() => {
-    loadMoreData();
-  }, []);
+  const getData = useCallback(
+    async (pageNumber: number, limitPage: string, search: string) => {
+      const apiUrl = new URL(`http://localhost:3000/api/products`);
 
-  const loadMoreData = async () => {
+      apiUrl.searchParams.append("page", pageNumber.toString());
+      apiUrl.searchParams.append("size", limitPage);
+      if (search) {
+        apiUrl.searchParams.append("search", search);
+      }
+
+      const res = await fetch(apiUrl.toString(), { cache: "no-store" });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      return res.json();
+    },
+    []
+  );
+
+  const loadMoreData = useCallback(async () => {
     try {
-      const newData = await getData(page);
-      setData((prevData) => [...prevData, ...newData]);
-      setPage((prevPage) => prevPage + 1);
+      const newData = await getData(pageNumber, limitPage, search);
+      const result = newData.result;
+
+      setData((prevData) => [...prevData, ...result]);
+
+      if (result.length === 0) {
+        setHasMore(false);
+      }
     } catch (error) {
       console.error(error);
+      setHasMore(false);
     }
+  }, [pageNumber, limitPage, search, getData]);
+
+  useEffect(() => {
+    setData([]);
+    setPageNumber(1);
+    setHasMore(true);
+  }, [limitPage, search]);
+
+  useEffect(() => {
+    if (pageNumber === 1) {
+      setData([]);
+    }
+    loadMoreData();
+  }, [pageNumber, loadMoreData]);
+
+  const handlePageNumber = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
   };
 
   return (
@@ -54,19 +85,25 @@ export default function Products({ product }: { product: ProductData }) {
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
         <div className="grid grid-cols-12 gap-20">
-          <FilterCard />
+          <FilterCard
+            setLimit={setLimitPage}
+            setData={setData}
+            setPageNumber={setPageNumber}
+            setSearch={setSearch}
+          />
           <div className="col-span-9">
             <div id="scrollableDiv" style={{ height: 800, overflow: "auto" }}>
               <InfiniteScroll
                 dataLength={data.length}
-                next={loadMoreData}
-                hasMore={true}
+                next={handlePageNumber}
+                hasMore={hasMore}
                 loader={<h4>Loading...</h4>}
                 endMessage={
                   <p style={{ textAlign: "center" }}>
                     <b>Yay! You have seen it all</b>
                   </p>
                 }
+                scrollableTarget="scrollableDiv"
               >
                 <div className="grid grid-cols-4 p-10 gap-5">
                   {data.map((product, index) => {

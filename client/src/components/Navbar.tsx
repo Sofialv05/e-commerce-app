@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemeController from "./ThemeController";
-import Search from "./Search";
+import Search from "../app/(withNavbar)/products/Search";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -71,9 +71,7 @@ export default function Navbar() {
             </ul>
           </div>
         </div>
-        <div className="w-full">
-          <Search />
-        </div>
+
         <div className="navbar-end gap-10">
           <ThemeController />
           {!cookies().get("accessToken") ? (
@@ -88,7 +86,10 @@ export default function Navbar() {
                 redirect("/login");
               }}
             >
-              <button type="submit" className="btn">
+              <button
+                type="submit"
+                className="rounded-md py-2 px-3 bg-red-600 hover:bg-red-400 text-white text-sm"
+              >
                 Logout
               </button>
             </form>

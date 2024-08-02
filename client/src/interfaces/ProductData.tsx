@@ -11,3 +11,10 @@ export interface ProductData {
   createdAt: Date;
   updatadAt: Date;
 }
+
+export interface ProductResult {
+  totalData: number;
+  result: ProductData[];
+  page: number;
+  totalPage: number;
+}

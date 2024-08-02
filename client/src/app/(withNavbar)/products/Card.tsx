@@ -20,10 +20,7 @@ export default function Card({ product }: { product: ProductData }) {
       });
   };
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="bg-gray-200 h-[400px] rounded-xl cursor-pointer hover:scale-[1.03] transition-all relative overflow-hidden"
-    >
+    <main className="bg-gray-200 h-[400px] rounded-xl cursor-pointer hover:scale-[1.03] transition-all relative overflow-hidden">
       <div className="p-6">
         <div
           className="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4"
@@ -41,6 +38,8 @@ export default function Card({ product }: { product: ProductData }) {
             />
           </svg>
         </div>
+      </div>
+      <Link href={`/products/${product.slug}`}>
         <div className="w-2/3 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8">
           <img
             src={product.thumbnail}
@@ -48,15 +47,15 @@ export default function Card({ product }: { product: ProductData }) {
             className="h-full w-full object-contain"
           />
         </div>
-      </div>
-      <div className="grid grid-rows-2 h-[135px] text-center bg-gray-100 p-5">
-        <h3 className="row-span-1 text-md self-center font-bold text-gray-800">
-          {product.name}
-        </h3>
-        <h4 className="text-sm self-center row-span-1 text-gray-800 font-md mt-5">
-          {formatCurrency(product.price)}
-        </h4>
-      </div>
-    </Link>
+        <div className="grid grid-rows-2 h-[135px] text-center bg-gray-100 p-5">
+          <h3 className="row-span-1 text-md self-center font-bold text-gray-800">
+            {product.name}
+          </h3>
+          <h4 className="text-sm self-center row-span-1 text-gray-800 font-md mt-5">
+            {formatCurrency(product.price)}
+          </h4>
+        </div>
+      </Link>
+    </main>
   );
 }

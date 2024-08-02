@@ -4,14 +4,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
+    // console.log("test");
     const reqHeaders = headers();
     const userId = reqHeaders.get("x-user-id") as string;
-    console.log(userId);
+    // console.log(userId);
+    if (!userId) {
+      throw new Error("User is required");
+    }
     const data = await WishlistModel.findAllWishlists(userId);
-
+    // console.log(data);
     return NextResponse.json(data);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
@@ -21,16 +25,16 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const body: { productId: string } = await request.json();
+    const productId: string = await request.json();
     const reqHeaders = headers();
     const userId = reqHeaders.get("x-user-id") as string;
-    console.log(body.productId);
-    if (!body.productId) {
-      return;
+
+    if (!productId) {
+      throw new Error("product must be provided");
     }
     const result = await WishlistModel.addWishlist({
       userId,
-      productId: body.productId,
+      productId,
     });
     return NextResponse.json(
       { message: "success add an item to the wishlist" },

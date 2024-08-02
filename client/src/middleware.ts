@@ -17,11 +17,11 @@ export async function middleware(request: NextRequest) {
     cookieToken.value,
     jwtSecret
   );
-  //   console.log(payload);
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-user-id", payload._id);
   requestHeaders.set("x-user-email", payload.email);
+  // console.log(requestHeaders);
 
   return NextResponse.next({
     request: {
@@ -31,5 +31,5 @@ export async function middleware(request: NextRequest) {
 }
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/wishlist", "/api/wishlist"],
+  matcher: ["/wishlist", "/api/wishlist", "/api/wishlist/:id*"],
 };

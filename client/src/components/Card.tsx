@@ -3,7 +3,7 @@ import { ProductData } from "@/interfaces/ProductData";
 import formatCurrency from "@/helpers/formatCurrency";
 
 export default function Card({ product }: { product: ProductData }) {
-  console.log(product);
+  // console.log(product);
   // return (
   //   <Link
   //     href={`/products/${product.slug}`}

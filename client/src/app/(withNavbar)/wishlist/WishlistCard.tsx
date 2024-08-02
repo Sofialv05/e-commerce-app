@@ -1,9 +1,12 @@
 "use client";
 import formatCurrency from "@/helpers/formatCurrency";
 import { WishlistData } from "@/interfaces/WishlistData";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function WishlistCard({ wishlist }: { wishlist: WishlistData }) {
+  const router = useRouter();
   const removeHandler = (id: object) => {
     fetch("http://localhost:3000/api/wishlist/" + id, {
       method: "DELETE",
@@ -15,8 +18,9 @@ export default function WishlistCard({ wishlist }: { wishlist: WishlistData }) {
         res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       });
+    router.refresh();
   };
   return (
     <main className="bg-gray-200 h-[400px] rounded-xl cursor-pointer hover:scale-[1.03] transition-all relative overflow-hidden">

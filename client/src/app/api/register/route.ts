@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const result = await UserModel.addNewUser(body);
-    console.log(result);
+    // console.log(result);
     return NextResponse.json({ message: "register success" }, { status: 201 });
   } catch (error) {
     console.log(error);

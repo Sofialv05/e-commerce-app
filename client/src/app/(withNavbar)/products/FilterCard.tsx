@@ -2,7 +2,7 @@
 
 export default function FilterCard() {
   return (
-    <div className="col-span-3 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">
+    <div className="col-span-3 mt-10 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">
       {/*  */}
 
       <div className=" box rounded-xl border border-gray-300 bg-white p-6 w-full md:max-w-sm">

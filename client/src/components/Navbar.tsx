@@ -55,25 +55,13 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">Furnitures</a>
           <div className=" hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
                 <Link href={"/"}>Home</Link>
               </li>
-              <li>
-                <details>
-                  <summary>Products</summary>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </details>
-              </li>
+
               <li>
                 <Link href={"/products"}>Products</Link>
               </li>
@@ -83,10 +71,10 @@ export default function Navbar() {
             </ul>
           </div>
         </div>
-        <div className="">
+        <div className="w-full">
           <Search />
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-10">
           <ThemeController />
           {!cookies().get("accessToken") ? (
             <Link href={"/login"} className="btn">

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import ThemeController from "./ThemeController";
 import Search from "./Search";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function Navbar() {
   return (
@@ -86,10 +88,23 @@ export default function Navbar() {
         </div>
         <div className="navbar-end">
           <ThemeController />
-
-          <Link href={"/login"} className="btn">
-            Login
-          </Link>
+          {!cookies().get("accessToken") ? (
+            <Link href={"/login"} className="btn">
+              Login
+            </Link>
+          ) : (
+            <form
+              action={async () => {
+                "use server";
+                cookies().delete("accessToken");
+                redirect("/login");
+              }}
+            >
+              <button type="submit" className="btn">
+                Logout
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>

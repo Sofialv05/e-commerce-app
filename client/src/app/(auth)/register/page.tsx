@@ -31,7 +31,7 @@ export default function Register() {
         res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         router.push("/login");
       });
   };

@@ -3,6 +3,16 @@ import Carousel from "./Carousel";
 import Hero from "./Hero";
 
 export default function Home() {
+  const getData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/products`);
+
+      return response.json();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <main className="h-max pb-20">
       <Hero />
@@ -30,17 +40,14 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h1 className="text-center text-xl font-bold">Featured Products</h1>
+        <h1 className="text-center text-2xl  font-bold">Featured Products</h1>
       </div>
       <div className="mb-10 mt-5">
-        <hr className="w-5" />
+        <hr className="border-gray-500 border-2" />
         <hr />
       </div>
 
       <div className="grid grid-cols-5 gap-5"></div>
-      <div className="w-full bg-gray-500 my-10 py-10 h-30">
-        <h1 className="text-xl text-center">About Us</h1>
-      </div>
     </main>
   );
 }

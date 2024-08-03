@@ -1,26 +1,44 @@
 "use client";
 import formatCurrency from "@/helpers/formatCurrency";
 import { WishlistData } from "@/interfaces/WishlistData";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function WishlistCard({ wishlist }: { wishlist: WishlistData }) {
   const router = useRouter();
-  const removeHandler = (id: object) => {
-    fetch("http://localhost:3000/api/wishlist/" + id, {
-      method: "DELETE",
-      // headers: {
-      //   Cookie: cookies().toString(),
-      // },
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then((data) => {
+  const removeHandler = async (id: object) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/wishlist/" + id,
+          {
+            method: "DELETE",
+          }
+        );
+        const data: { message: "string" } = await response.json();
         // console.log(data);
-      });
-    router.refresh();
+        Swal.fire({
+          title: "Success!",
+          text: data.message,
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        router.refresh();
+      } catch (err) {
+        toast.error("error");
+      }
+    }
   };
   return (
     <main className="bg-gray-200 h-[400px] rounded-xl cursor-pointer hover:scale-[1.03] transition-all relative overflow-hidden">

@@ -87,6 +87,7 @@ export default async function Detail({ params }: { params: { slug: string } }) {
                 action={async () => {
                   "use server";
                   handleLike(data._id);
+                  revalidatePath("/wishlist");
                 }}
               >
                 <button className="btn w-full mx-auto">Add to Wishlist</button>

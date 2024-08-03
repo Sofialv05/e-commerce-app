@@ -15,7 +15,6 @@ export async function GET(request: NextRequest) {
 
     const search = query.get("search") as string;
     const data = await ProductModel.findAllProducts(size, page, search);
-
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);

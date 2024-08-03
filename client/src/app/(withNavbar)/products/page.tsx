@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "./Card";
 import { ProductData, ProductResult } from "@/interfaces/ProductData";
 import FilterCard from "./FilterCard";
+import Loading from "./loading";
 
 export default function Products({ product }: { product: ProductData }) {
   const [data, setData] = useState<ProductData[]>([]);
@@ -43,11 +44,11 @@ export default function Products({ product }: { product: ProductData }) {
         search
       );
       const result = newData.result;
+
       setData((prevData) => [...prevData, ...result]);
 
       if (result.length === 0) {
         setHasMore(false);
-        return;
       } else {
         handlePageNumber();
       }
@@ -59,10 +60,14 @@ export default function Products({ product }: { product: ProductData }) {
 
   useEffect(() => {
     setData([]);
+    setPageNumber(1);
     setHasMore(true);
   }, [limitPage, search]);
 
   useEffect(() => {
+    // if (pageNumber === 1) {
+    //   setData([]);
+    // }
     loadMoreData();
   }, [pageNumber, loadMoreData]);
 
@@ -99,7 +104,7 @@ export default function Products({ product }: { product: ProductData }) {
                 dataLength={data.length}
                 next={handlePageNumber}
                 hasMore={hasMore}
-                loader={<h4>Loading...</h4>}
+                loader={<Loading />}
                 endMessage={
                   <p style={{ textAlign: "center" }}>
                     <b>Yay! You have seen it all</b>

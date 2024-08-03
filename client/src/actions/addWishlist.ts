@@ -1,9 +1,5 @@
-"use server";
-
-import { revalidatePath } from "next/cache";
-
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 export const handleLike = async (productId: string) => {
   try {
@@ -18,8 +14,9 @@ export const handleLike = async (productId: string) => {
     if (!res.ok) {
       throw new Error("Failed to add the product to wishlist");
     }
-    await res.json();
-    revalidatePath("/wishlist");
+    const data: { message: string } = await res.json();
+    // console.log(data.message);
+    // toast.success(data.message);
   } catch (error) {
     console.error(error);
   }

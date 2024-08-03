@@ -2,28 +2,28 @@
 import Link from "next/link";
 import { ProductData } from "@/interfaces/ProductData";
 import formatCurrency from "@/helpers/formatCurrency";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Card({ product }: { product: ProductData }) {
   const router = useRouter();
-  const handleLike = (productId: string) => {
+  const handleLike = async (productId: string) => {
     // console.log(productId);
-    fetch("http://localhost:3000/api/wishlist", {
-      method: "POST",
-      body: JSON.stringify(productId),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then((data) => {
-        // console.log(data);
+    try {
+      const response = await fetch("http://localhost:3000/api/wishlist", {
+        method: "POST",
+        body: JSON.stringify(productId),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-    router.refresh();
-    // revalidatePath("/wishlist");
-    // redirect("/wishlist");
+      const data: { message: string } = await response.json();
+      // console.log(data);
+      toast.success(data.message);
+      router.refresh();
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <main className="bg-gray-200 h-[400px] rounded-xl cursor-pointer hover:scale-[1.03] transition-all relative overflow-hidden">

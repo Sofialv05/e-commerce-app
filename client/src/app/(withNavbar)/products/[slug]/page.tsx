@@ -19,7 +19,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // console.log(params);
   const product: ProductData = await fetch(
-    `http://localhost:3000/api/products/${params.slug}`
+    process.env.BASE_URL + `/api/products/${params.slug}`
   ).then((res) => res.json());
   // console.log(product);
   return {
@@ -32,7 +32,7 @@ export default async function Detail({ params }: { params: { slug: string } }) {
   async function getData() {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/products/${params.slug}`,
+        process.env.BASE_URL + `/api/products/${params.slug}`,
         {
           cache: "no-store",
         }

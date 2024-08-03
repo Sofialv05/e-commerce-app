@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const handleLike = async (productId: string) => {
   try {
-    const res = await fetch("http://localhost:3000/api/wishlist", {
+    const res = await fetch(process.env.BASE_URL + "/api/wishlist", {
       method: "POST",
       body: JSON.stringify(productId),
       headers: {

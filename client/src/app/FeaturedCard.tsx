@@ -10,7 +10,7 @@ export default function FeaturedCard({ product }: { product: ProductData }) {
   const handleLike = async (productId: string) => {
     // console.log(productId);
     try {
-      const response = await fetch("http://localhost:3000/api/wishlist", {
+      const response = await fetch(process.env.BASE_URL + "/api/wishlist", {
         method: "POST",
         body: JSON.stringify(productId),
         headers: {

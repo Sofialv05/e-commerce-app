@@ -11,7 +11,7 @@ export default function Carousel() {
   const getData = async (): Promise<ProductData[]> => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/featured`,
+        process.env.BASE_URL + `/api/products/featured`,
         {
           cache: "no-store",
         }

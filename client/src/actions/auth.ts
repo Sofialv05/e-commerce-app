@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 export const loginAction = async (formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
-  const result = await fetch("http://localhost:3000/api/login", {
+  const result = await fetch(process.env.BASE_URL + "/api/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: {

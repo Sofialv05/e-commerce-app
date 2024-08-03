@@ -10,6 +10,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.log(error);
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message });
+    }
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }

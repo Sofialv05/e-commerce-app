@@ -64,6 +64,15 @@ class ProductModel {
 
     return collection.findOne({ slug });
   }
+  static async findRandomProducts() {
+    const collection = DB.collection<Product>("Products");
+
+    const result = await collection
+      .aggregate([{ $sample: { size: 10 } }])
+      .toArray();
+    return result;
+  }
+
   // static async insertAll(
   //   datas: {
   //     name: string;

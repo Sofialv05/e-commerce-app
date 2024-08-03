@@ -61,7 +61,7 @@ export default function FilterCard({
             <option value="16">show 16 products</option>
             <option value="20">show 20 products</option>
           </select>
-          <svg
+          {/* <svg
             className="absolute top-1/2 -translate-y-1/2 right-4 z-50"
             width={16}
             height={16}
@@ -76,8 +76,8 @@ export default function FilterCard({
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-          </svg>
-        </div>
+          </svg> */}
+          {/* </div>
         <p className="font-medium text-sm leading-6 text-black mb-3">
           Discount
         </p>
@@ -123,7 +123,7 @@ export default function FilterCard({
             >
               50% or more
             </label>
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>

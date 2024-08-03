@@ -27,7 +27,7 @@ export default async function Wishlist({
 
   const data = await getData();
   return (
-    <section className="w-full h-full">
+    <section className="w-full min-h-screen">
       <div className="w-full px-4 md:px-8">
         <div className="flex flex-col lg:items-center max-lg:gap-4 justify-between w-full">
           <h1 className="text-2xl text-center">Your Wishlist</h1>

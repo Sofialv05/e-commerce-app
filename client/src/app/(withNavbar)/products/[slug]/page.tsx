@@ -4,6 +4,7 @@ import formatCurrency from "@/helpers/formatCurrency";
 import { revalidatePath } from "next/cache";
 import { handleLike } from "@/actions/addWishlist";
 import type { Metadata, ResolvingMetadata } from "next";
+import Recommended from "./Recommended";
 
 type Props = {
   params: { slug: string };
@@ -47,63 +48,85 @@ export default async function Detail({ params }: { params: { slug: string } }) {
   const data = await getData();
 
   return (
-    <main className="w-full shadow-lg rounded-md bg-gray-100 mx-20">
-      <div className="w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-5">
-          <div className="lg:col-span-3 h-[600px]">
-            <div className="grid grid-cols-4 h-full items-center justify-center p-10">
-              <div className="col-span-3 flex justify-center items-center">
-                <img
-                  src={data.thumbnail}
-                  alt="Product"
-                  className="h-[400px] rounded object-cover"
-                />
+    <div className="flex flex-col justify-center items-center px-20">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-2xl">Product Detail</h1>
+        <svg
+          className="my-7 w-full"
+          xmlns="http://www.w3.org/2000/svg"
+          width={1216}
+          height={2}
+          viewBox="0 0 1216 2"
+          fill="none"
+        >
+          <path d="M0 1H1216" stroke="#E5E7EB" />
+        </svg>
+      </div>
+      <div className="w-full shadow-lg rounded-md bg-gray-100 mx-20">
+        <div className="w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-5">
+            <div className="lg:col-span-3 h-[600px]">
+              <div className="grid grid-cols-4 h-full items-center justify-center p-10">
+                <div className="col-span-3 flex justify-center items-center">
+                  <img
+                    src={data.thumbnail}
+                    alt="Product"
+                    className="h-[400px] rounded object-cover"
+                  />
+                </div>
+                <div className="mt-4 col-span-1 flex flex-col justify-center gap-4 mx-auto">
+                  {data.images.map((image: string, index: number) => (
+                    <div
+                      key={index}
+                      className="w-[120px] h-[120px] flex items-center justify-center p-4 cursor-pointer"
+                    >
+                      <img
+                        src={image}
+                        alt={`Product ${index + 1}`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="mt-4 col-span-1 flex flex-col justify-center gap-4 mx-auto">
-                {data.images.map((image: string, index: number) => (
-                  <div
-                    key={index}
-                    className="w-[120px] h-[120px] flex items-center justify-center p-4 cursor-pointer"
-                  >
-                    <img
-                      src={image}
-                      alt={`Product ${index + 1}`}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                ))}
+            </div>
+            <div className="col-span-2 bg-gray-400 rounded-md p-10">
+              <h2 className="text-3xl font-semibold">{data.name}</h2>
+              <div className="flex flex-wrap gap-4 mt-8">
+                <p className="text-4xl font-semibold">
+                  {formatCurrency(data.price)}
+                </p>
               </div>
-            </div>
-          </div>
-          <div className="col-span-2 bg-gray-400 rounded-md p-10">
-            <h2 className="text-3xl font-semibold">{data.name}</h2>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <p className="text-4xl font-semibold">
-                {formatCurrency(data.price)}
-              </p>
-            </div>
-            <div className="inline-block w-full my-12">
-              <form
-                action={async () => {
-                  "use server";
-                  handleLike(data._id);
-                  revalidatePath("/wishlist");
-                }}
-              >
-                <button className="btn w-full mx-auto">Add to Wishlist</button>
-              </form>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold text-white">
-                About the product
-              </h3>
-              <div className="space-y-3 list-disc mt-4 pl-4 text-sm text-white">
-                <p>{data.description}</p>
+              <div className="inline-block w-full my-12">
+                <form
+                  action={async () => {
+                    "use server";
+                    handleLike(data._id);
+                    revalidatePath("/wishlist");
+                  }}
+                >
+                  <button className="btn w-full mx-auto">
+                    Add to Wishlist
+                  </button>
+                </form>
+              </div>
+              <div className="mt-8">
+                <div className="space-y-3 mt-4 pl-4 text-sm text-white">
+                  <h3 className="text-xl font-semibold text-white">
+                    About the product
+                  </h3>
+                  <p>{data.excerpt}</p>
+                  <p className="text-justify">{data.description}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
+      <div className="mt-28 flex flex-col justify-center items-center">
+        <h1 className="text-2xl">Products You May Like</h1>
+        <Recommended />
+      </div>
+    </div>
   );
 }

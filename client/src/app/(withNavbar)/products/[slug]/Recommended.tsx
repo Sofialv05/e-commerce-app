@@ -1,9 +1,9 @@
 "use client";
 import { ProductData } from "@/interfaces/ProductData";
 import { useEffect, useState } from "react";
-import FeaturedCard from "../FeaturedCard";
+import FeaturedCard from "./FeaturedCard";
 
-export default function Carousel() {
+export default function Recommended() {
   const [firstHalf, setFirstHalf] = useState<ProductData[]>([]);
   const [secondHalf, setSecondHalf] = useState<ProductData[]>([]);
   const [isShowingFirstHalf, setIsShowingFirstHalf] = useState(true);

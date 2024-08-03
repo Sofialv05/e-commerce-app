@@ -40,17 +40,20 @@ export default function Register() {
 
   return (
     <div>
-      <div className=" card bg-base-100 w-96 h-auto p-10 shadow-xl justify-center items-center">
-        <div className="card-title ">
+      <div className="mx-10 card bg-base-100 md:w-96 h-auto p-10 shadow-xl justify-center items-center">
+        <div className="card-title mb-8">
           <h1>Create an account</h1>
         </div>
-        <form className="card-body justify-center" onSubmit={submitHandler}>
+        <form
+          className="lg:card-body justify-center flex flex-col gap-2"
+          onSubmit={submitHandler}
+        >
           <input
             type="text"
             value={form.name}
             name="name"
             placeholder="name"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full lg:max-w-xs"
             onChange={inputHandler}
           />
           <input
@@ -58,7 +61,7 @@ export default function Register() {
             value={form.username}
             name="username"
             placeholder="username"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full lg:max-w-xs"
             onChange={inputHandler}
           />
           <input
@@ -66,7 +69,7 @@ export default function Register() {
             value={form.email}
             name="email"
             placeholder="email"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full lg:max-w-xs"
             onChange={inputHandler}
           />
           <input
@@ -74,15 +77,15 @@ export default function Register() {
             value={form.password}
             name="password"
             placeholder="password"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full lg:max-w-xs"
             onChange={inputHandler}
           />
-          <button type="submit" className="btn mt-5">
+          <button type="submit" className="btn my-6">
             Create an account
           </button>
         </form>
         <div>
-          <Link href={"/login"} className="ext-sm font-light text-gray-500 ">
+          <Link href={"/login"} className="text-sm font-light text-gray-500 ">
             Already have an account?{" "}
             <span className="font-medium text-primary-600 hover:underline ">
               Log in

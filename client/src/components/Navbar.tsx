@@ -18,8 +18,8 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      <div className="md:px-8 lg:px-16 z-50 sticky top-0 shadow-sm">
-        <div className="navbar bg-base-100">
+      <div className=" lg:px-16 z-50 sticky top-0 shadow-sm">
+        <div className="navbar md:px-8 bg-base-100">
           <div className="navbar-start">
             <div className="dropdown">
               <div

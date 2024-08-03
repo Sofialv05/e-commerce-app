@@ -17,7 +17,7 @@ export default function Products() {
 
   const getData = useCallback(
     async (pageNumber: number, limitPage: string, search: string) => {
-      const apiUrl = new URL(process.env.BASE_URL + `/api/products`);
+      const apiUrl = new URL("http://localhost:3000" + `/api/products`);
 
       apiUrl.searchParams.append("page", pageNumber.toString());
       apiUrl.searchParams.append("size", limitPage);
@@ -75,7 +75,7 @@ export default function Products() {
   return (
     <section className="w-full">
       <div className="w-full px-4 md:px-8">
-        <div className="flex flex-col lg:items-center max-lg:gap-4 justify-between w-full">
+        <div className="flex flex-col xl:items-center max-lg:gap-4 justify-between w-full">
           <h1 className="text-2xl text-center">Products</h1>
         </div>
         <svg
@@ -88,7 +88,7 @@ export default function Products() {
         >
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
-        <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-20">
+        <div className="flex flex-col xl:grid xl:grid-cols-12 xl:gap-20">
           <FilterCard
             setLimit={setLimitPage}
             setData={setData}
@@ -109,7 +109,7 @@ export default function Products() {
                 }
                 scrollableTarget="scrollableDiv"
               >
-                <div className="flex flex-col md:grid-cols-2 gap-10 md:grid lg:grid-cols-4 md:p-10 md:gap-5">
+                <div className="flex flex-col md:grid-cols-2 gap-10 md:grid xl:grid-cols-4 md:p-10 md:gap-5">
                   {data.map((product, index) => {
                     return <Card key={index} product={product} />;
                   })}

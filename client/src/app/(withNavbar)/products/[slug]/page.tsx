@@ -19,7 +19,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // console.log(params);
   const product: ProductData = await fetch(
-    process.env.BASE_URL + `/api/products/${params.slug}`
+    "http://localhost:3000" + `/api/products/${params.slug}`
   ).then((res) => res.json());
   // console.log(product);
   return {
@@ -32,7 +32,7 @@ export default async function Detail({ params }: { params: { slug: string } }) {
   async function getData() {
     try {
       const res = await fetch(
-        process.env.BASE_URL + `/api/products/${params.slug}`,
+        "http://localhost:3000" + `/api/products/${params.slug}`,
         {
           cache: "no-store",
         }
@@ -50,7 +50,7 @@ export default async function Detail({ params }: { params: { slug: string } }) {
   const data = await getData();
 
   return (
-    <div className="flex flex-col justify-center items-center md:px-14 lg:px-20">
+    <div className="flex flex-col justify-center items-center md:px-14 xl:px-20">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl">Product Detail</h1>
         <svg
@@ -64,9 +64,9 @@ export default async function Detail({ params }: { params: { slug: string } }) {
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
       </div>
-      <div className="w-80 md:w-full shadow-lg rounded-md bg-gray-100 lg:mx-20">
+      <div className="w-80 md:w-full shadow-lg rounded-md bg-gray-100 xl:mx-20">
         <div className="md:w-full">
-          <div className="flex flex-col md:grid md:grid-cols-1 lg:grid-cols-5">
+          <div className="flex flex-col md:grid md:grid-cols-1 xl:grid-cols-5">
             <div className="lg:col-span-3 md:h-[600px]">
               <DetailImage thumbnail={data.thumbnail} images={data.images} />
             </div>

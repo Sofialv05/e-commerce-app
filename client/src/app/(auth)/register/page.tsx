@@ -22,7 +22,7 @@ export default function Register() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch(process.env.BASE_URL + "/api/register", {
+      const response = await fetch("http://localhost:3000" + "/api/register", {
         method: "POST",
         body: JSON.stringify(form),
         headers: {

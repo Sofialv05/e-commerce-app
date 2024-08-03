@@ -8,7 +8,7 @@ export default async function Wishlist({
   wishlist: WishlistData;
 }) {
   async function getData(): Promise<WishlistData[]> {
-    const res = await fetch(process.env.BASE_URL + `/api/wishlist`, {
+    const res = await fetch("http://localhost:3000" + `/api/wishlist`, {
       cache: "no-store",
       headers: {
         Cookie: cookies().toString(),
@@ -38,7 +38,7 @@ export default async function Wishlist({
         >
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
-        <div className="flex flex-col md:grid md:grid-cols-5 gap-10">
+        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10">
           {data.map((wishlist, index) => {
             return <WishlistCard key={index} wishlist={wishlist} />;
           })}

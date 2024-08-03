@@ -21,7 +21,7 @@ export default function WishlistCard({ wishlist }: { wishlist: WishlistData }) {
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          process.env.BASE_URL + "/api/wishlist/" + id,
+          "http://localhost:3000" + "/api/wishlist/" + id,
           {
             method: "DELETE",
           }

@@ -26,10 +26,10 @@ export default function FilterCard({
     setSearch(value);
   };
   return (
-    <div className=" lg:mt-10 col-span-3 w-full max-lg:max-w-md max-lg:mx-auto">
+    <div className=" xl:mt-10 col-span-3 w-full max-lg:max-w-md max-lg:mx-auto">
       {/*  */}
 
-      <div className=" box rounded-xl border border-gray-300 bg-white p-6 w-full lg:max-w-sm">
+      <div className=" box rounded-xl border border-gray-300 bg-white p-6 w-full xl:max-w-sm">
         <div className="flex items-center justify-between w-full pb-3 border-b border-gray-200 mb-7">
           <div className="form-control w-full h-10">
             <input

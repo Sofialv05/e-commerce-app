@@ -11,7 +11,7 @@ export default function Recommended() {
   const getData = async (): Promise<ProductData[]> => {
     try {
       const response = await fetch(
-        process.env.BASE_URL + `/api/products/featured`,
+        "http://localhost:3000" + `/api/products/featured`,
         {
           cache: "no-store",
         }
@@ -52,7 +52,7 @@ export default function Recommended() {
 
   return (
     <>
-      <div className="lg:hidden">
+      <div className="xl:hidden">
         <div
           id="indicators-carousel h-auto "
           className="relative w-full "
@@ -70,14 +70,14 @@ export default function Recommended() {
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex">
+      <div className="hidden xl:flex">
         <div
           id="indicators-carousel h-auto "
           className="relative w-full "
           data-carousel="static"
         >
           {/* Carousel wrapper */}
-          <div className="px-20 relative h-64 overflow-hidden rounded-lg md:h-full py-10">
+          <div className="px-20 lg:px-0 xl:px-20 relative h-64 overflow-hidden rounded-lg md:h-full py-10">
             <div className=" grid grid-cols-5 gap-5">
               {displayedData.map((product, index) => (
                 <div key={index} className="col-span-1">

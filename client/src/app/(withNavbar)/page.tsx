@@ -1,10 +1,8 @@
-import Card from "@/components/Card";
 import Carousel from "./Carousel";
 import Hero from "./Hero";
 import Link from "next/link";
 
 export default async function Home() {
-  // console.log(data);
   return (
     <main className="h-max pb-20">
       <Hero />
@@ -32,8 +30,10 @@ export default async function Home() {
           </Link>
         </div>
       </div>
-      <div className="mt-28">
-        <h1 className="text-center text-2xl  font-bold">Featured Products</h1>
+      <div className="md:mt-28">
+        <h1 className="text-center text-xl md:text-2xl  font-bold">
+          Featured Products
+        </h1>
       </div>
       <div className=" mt-5">
         <hr className="border-gray-500 border-2" />

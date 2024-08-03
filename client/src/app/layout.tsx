@@ -13,8 +13,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} data-theme="light">
         <div className="max-h-max">
-          <Toaster />
           {children}
+          <Toaster />
         </div>
       </body>
     </html>

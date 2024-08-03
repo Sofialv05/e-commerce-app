@@ -26,17 +26,17 @@ export default function FilterCard({
     setSearch(value);
   };
   return (
-    <div className="col-span-3 mt-10 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">
+    <div className=" lg:mt-10 col-span-3 w-full max-lg:max-w-md max-lg:mx-auto">
       {/*  */}
 
-      <div className=" box rounded-xl border border-gray-300 bg-white p-6 w-full md:max-w-sm">
+      <div className=" box rounded-xl border border-gray-300 bg-white p-6 w-full lg:max-w-sm">
         <div className="flex items-center justify-between w-full pb-3 border-b border-gray-200 mb-7">
           <div className="form-control w-full h-10">
             <input
               type="search"
               placeholder="Search"
               name="search"
-              className="input input-bordered w-24 md:w-auto"
+              className="input input-bordered w-auto"
               onChange={handleSearch}
             />
           </div>

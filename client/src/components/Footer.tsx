@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div className="mx-6 py-10 text-center md:text-left justify-between">
-          <div className="flex justify-between gap-10">
+          <div className="flex flex-col md:mx-10 md:flex-row justify-between gap-10">
             {/* TW Elements section */}
             <div className="">
               <h6 className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
@@ -82,7 +82,7 @@ export default function Footer() {
                 </span>
                 Furniture Store
               </h6>
-              <p>
+              <p className="text-justify md:text-start">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo,
                 labore nulla? Iure consequuntur aspernatur ratione quaerat
                 iusto, ipsam fuga eos debitis, earum doloribus odit omnis
@@ -93,7 +93,7 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="self-end px-20">
+            <div className=" lg:px-20">
               <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
                 Contact
               </h6>

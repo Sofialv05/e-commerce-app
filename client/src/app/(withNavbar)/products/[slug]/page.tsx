@@ -50,7 +50,7 @@ export default async function Detail({ params }: { params: { slug: string } }) {
   const data = await getData();
 
   return (
-    <div className="flex flex-col justify-center items-center px-20">
+    <div className="flex flex-col justify-center items-center md:px-14 lg:px-20">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl">Product Detail</h1>
         <svg
@@ -64,16 +64,18 @@ export default async function Detail({ params }: { params: { slug: string } }) {
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
       </div>
-      <div className="w-full shadow-lg rounded-md bg-gray-100 mx-20">
-        <div className="w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-5">
-            <div className="lg:col-span-3 h-[600px]">
+      <div className="w-80 md:w-full shadow-lg rounded-md bg-gray-100 lg:mx-20">
+        <div className="md:w-full">
+          <div className="flex flex-col md:grid md:grid-cols-1 lg:grid-cols-5">
+            <div className="lg:col-span-3 md:h-[600px]">
               <DetailImage thumbnail={data.thumbnail} images={data.images} />
             </div>
-            <div className="col-span-2 bg-gray-400 rounded-md p-10">
-              <h2 className="text-3xl font-semibold">{data.name}</h2>
+            <div className="col-span-2 bg-gray-400 rounded-md p-6 md:p-10">
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                {data.name}
+              </h2>
               <div className="flex flex-wrap gap-4 mt-8">
-                <p className="text-4xl font-semibold">
+                <p className="text-xl md:text-4xl font-semibold">
                   {formatCurrency(data.price)}
                 </p>
               </div>

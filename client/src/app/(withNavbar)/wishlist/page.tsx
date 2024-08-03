@@ -42,7 +42,7 @@ export default async function Wishlist({
         >
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
-        <div className="grid grid-cols-5 gap-10">
+        <div className="flex flex-col md:grid md:grid-cols-5 gap-10">
           {data.map((wishlist, index) => {
             return <WishlistCard key={index} wishlist={wishlist} />;
           })}

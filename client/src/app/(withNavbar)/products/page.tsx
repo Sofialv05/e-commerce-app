@@ -91,14 +91,14 @@ export default function Products({ product }: { product: ProductData }) {
         >
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
-        <div className="grid grid-cols-12 gap-20">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-20">
           <FilterCard
             setLimit={setLimitPage}
             setData={setData}
             setPageNumber={setPageNumber}
             setSearch={setSearch}
           />
-          <div className="col-span-9">
+          <div className="mt-10 md:col-span-9">
             <div id="scrollableDiv" style={{ height: 800, overflow: "auto" }}>
               <InfiniteScroll
                 dataLength={data.length}
@@ -112,7 +112,7 @@ export default function Products({ product }: { product: ProductData }) {
                 }
                 scrollableTarget="scrollableDiv"
               >
-                <div className="grid grid-cols-4 p-10 gap-5">
+                <div className="flex flex-col md:grid-cols-2 gap-10 md:grid lg:grid-cols-4 md:p-10 md:gap-5">
                   {data.map((product, index) => {
                     return <Card key={index} product={product} />;
                   })}

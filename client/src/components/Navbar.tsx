@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export default function Navbar() {
   return (
     <>
-      <div className="flex gap-4 max-sm:flex-col items-center justify-center text-center bg-gray-600 text-white px-6 py-2    font-[sans-serif]">
+      <div className="flex gap-4 max-sm:flex-col items-center justify-center text-center bg-gray-600 text-white px-6 py-2  font-[sans-serif]">
         <p className="text-base">Limited Time Offer: Get 20% Off!</p>
         <div className="flex gap-2">
           <button
@@ -18,7 +18,7 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      <div className="px-16 z-50 sticky top-0 shadow-sm">
+      <div className="md:px-8 lg:px-16 z-50 sticky top-0 shadow-sm">
         <div className="navbar bg-base-100">
           <div className="navbar-start">
             <div className="dropdown">
@@ -49,20 +49,7 @@ export default function Navbar() {
                 <li>
                   <Link href={"/"}>Home</Link>
                 </li>
-                <li>
-                  <a>Products</a>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
+
                 <li>
                   <Link href={"/products"}>Products</Link>
                 </li>
@@ -71,7 +58,9 @@ export default function Navbar() {
                 </li>
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl">Furnitures</a>
+            <Link href={"/"} className="btn btn-ghost text-xl">
+              Furnitures
+            </Link>
             <div className=" hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
                 <li>

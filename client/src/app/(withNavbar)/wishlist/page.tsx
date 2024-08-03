@@ -2,11 +2,11 @@ import { WishlistData } from "@/interfaces/WishlistData";
 import WishlistCard from "./WishlistCard";
 import { cookies } from "next/headers";
 
-export default async function Wishlist({
-  wishlist,
-}: {
-  wishlist: WishlistData;
-}) {
+interface WishlistProps {
+  wishlist: WishlistData[];
+}
+
+export default async function Wishlist({ wishlist }: WishlistProps) {
   async function getData(): Promise<WishlistData[]> {
     const res = await fetch(`http://localhost:3000/api/wishlist`, {
       cache: "no-store",
@@ -21,11 +21,8 @@ export default async function Wishlist({
     return res.json();
   }
 
-  // useEffect(() => {
-  //   getData();
-  // });
-
   const data = await getData();
+
   return (
     <section className="w-full min-h-screen">
       <div className="w-full px-4 md:px-8">
@@ -43,9 +40,9 @@ export default async function Wishlist({
           <path d="M0 1H1216" stroke="#E5E7EB" />
         </svg>
         <div className="flex flex-col md:grid md:grid-cols-5 gap-10">
-          {data.map((wishlist, index) => {
-            return <WishlistCard key={index} wishlist={wishlist} />;
-          })}
+          {data.map((item, index) => (
+            <WishlistCard key={index} wishlist={item} />
+          ))}
         </div>
       </div>
     </section>

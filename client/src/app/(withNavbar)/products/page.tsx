@@ -8,7 +8,7 @@ import { ProductData, ProductResult } from "@/interfaces/ProductData";
 import FilterCard from "./FilterCard";
 import Loading from "./loading";
 
-export default function Products({ product }: { product: ProductData }) {
+export default function Products() {
   const [data, setData] = useState<ProductData[]>([]);
   const [search, setSearch] = useState("");
   const [limitPage, setLimitPage] = useState("8");
@@ -65,9 +65,6 @@ export default function Products({ product }: { product: ProductData }) {
   }, [limitPage, search]);
 
   useEffect(() => {
-    // if (pageNumber === 1) {
-    //   setData([]);
-    // }
     loadMoreData();
   }, [pageNumber, loadMoreData]);
 

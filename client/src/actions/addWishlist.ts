@@ -3,14 +3,17 @@ import toast from "react-hot-toast";
 
 export const handleLike = async (productId: string) => {
   try {
-    const res = await fetch("http://localhost:3000" + "/api/wishlist", {
-      method: "POST",
-      body: JSON.stringify(productId),
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: cookies().toString(),
-      },
-    });
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/wishlist",
+      {
+        method: "POST",
+        body: JSON.stringify(productId),
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookies().toString(),
+        },
+      }
+    );
     if (!res.ok) {
       throw new Error("Failed to add the product to wishlist");
     }

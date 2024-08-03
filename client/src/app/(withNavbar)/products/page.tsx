@@ -17,7 +17,9 @@ export default function Products() {
 
   const getData = useCallback(
     async (pageNumber: number, limitPage: string, search: string) => {
-      const apiUrl = new URL("http://localhost:3000" + `/api/products`);
+      const apiUrl = new URL(
+        process.env.NEXT_PUBLIC_BASE_URL + `/api/products`
+      );
 
       apiUrl.searchParams.append("page", pageNumber.toString());
       apiUrl.searchParams.append("size", limitPage);

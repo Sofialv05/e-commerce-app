@@ -22,13 +22,16 @@ export default function Register() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000" + "/api/register", {
-        method: "POST",
-        body: JSON.stringify(form),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BASE_URL + "/api/register",
+        {
+          method: "POST",
+          body: JSON.stringify(form),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data: { message: string } = await response.json();
       toast.success(data.message);
       router.push("/login");

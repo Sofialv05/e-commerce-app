@@ -37,13 +37,19 @@ export default function Products({ product }: { product: ProductData }) {
 
   const loadMoreData = useCallback(async () => {
     try {
-      const newData = await getData(pageNumber, limitPage, search);
+      const newData: ProductResult = await getData(
+        pageNumber,
+        limitPage,
+        search
+      );
       const result = newData.result;
-
       setData((prevData) => [...prevData, ...result]);
 
       if (result.length === 0) {
         setHasMore(false);
+        return;
+      } else {
+        handlePageNumber();
       }
     } catch (error) {
       console.error(error);
@@ -53,14 +59,10 @@ export default function Products({ product }: { product: ProductData }) {
 
   useEffect(() => {
     setData([]);
-    setPageNumber(1);
     setHasMore(true);
   }, [limitPage, search]);
 
   useEffect(() => {
-    if (pageNumber === 1) {
-      setData([]);
-    }
     loadMoreData();
   }, [pageNumber, loadMoreData]);
 

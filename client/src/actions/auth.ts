@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 export const loginAction = async (formData: FormData) => {
   const email = formData.get("email");
@@ -15,9 +16,8 @@ export const loginAction = async (formData: FormData) => {
   });
 
   const data = (await result.json()) as { accessToken: string };
-  // console.log(data);
+
   const cookieStore = cookies();
   cookieStore.set("accessToken", data.accessToken);
-
   return redirect("/");
 };

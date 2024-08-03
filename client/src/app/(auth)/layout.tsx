@@ -5,12 +5,12 @@ export default function Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="h-screen flex flex-col">
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 shadow-md px-6">
         <Link href={"/"} className="btn btn-ghost text-xl">
-          daisyUI
+          Furnitures
         </Link>
       </div>
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-grow justify-center items-center bg-gray-400">
         {children}
       </div>
     </div>

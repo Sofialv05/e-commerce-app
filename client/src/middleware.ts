@@ -4,9 +4,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  //   console.log("testtt");
   const cookieToken = cookies().get("accessToken");
   if (!cookieToken) {
     return NextResponse.redirect(new URL("/login", request.url));
@@ -21,7 +19,6 @@ export async function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-user-id", payload._id);
   requestHeaders.set("x-user-email", payload.email);
-  // console.log(requestHeaders);
 
   return NextResponse.next({
     request: {
@@ -29,7 +26,7 @@ export async function middleware(request: NextRequest) {
     },
   });
 }
-// See "Matching Paths" below to learn more
+
 export const config = {
   matcher: ["/wishlist", "/api/wishlist", "/api/wishlist/:id*"],
 };

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Register() {
   const router = useRouter();
@@ -18,22 +19,23 @@ export default function Register() {
     setForm({ ...form, [name]: value });
   };
 
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/register", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        router.push("/login");
+    try {
+      const response = await fetch("http://localhost:3000/api/register", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+      const data: { message: string } = await response.json();
+      toast.success(data.message);
+      router.push("/login");
+    } catch (err) {
+      console.error(err);
+      // toast.error(err.errors[0]?.message)
+    }
   };
 
   return (
@@ -75,7 +77,7 @@ export default function Register() {
             className="input input-bordered w-full max-w-xs"
             onChange={inputHandler}
           />
-          <button type="submit" className="btn">
+          <button type="submit" className="btn mt-5">
             Create an account
           </button>
         </form>

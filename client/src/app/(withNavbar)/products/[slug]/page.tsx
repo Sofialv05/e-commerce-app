@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { handleLike } from "@/actions/addWishlist";
 import type { Metadata, ResolvingMetadata } from "next";
 import Recommended from "./Recommended";
+import DetailImages from "./DetailImage";
+import DetailImage from "./DetailImage";
 
 type Props = {
   params: { slug: string };
@@ -66,29 +68,7 @@ export default async function Detail({ params }: { params: { slug: string } }) {
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5">
             <div className="lg:col-span-3 h-[600px]">
-              <div className="grid grid-cols-4 h-full items-center justify-center p-10">
-                <div className="col-span-3 flex justify-center items-center">
-                  <img
-                    src={data.thumbnail}
-                    alt="Product"
-                    className="h-[400px] rounded object-cover"
-                  />
-                </div>
-                <div className="mt-4 col-span-1 flex flex-col justify-center gap-4 mx-auto">
-                  {data.images.map((image: string, index: number) => (
-                    <div
-                      key={index}
-                      className="w-[120px] h-[120px] flex items-center justify-center p-4 cursor-pointer"
-                    >
-                      <img
-                        src={image}
-                        alt={`Product ${index + 1}`}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <DetailImage thumbnail={data.thumbnail} images={data.images} />
             </div>
             <div className="col-span-2 bg-gray-400 rounded-md p-10">
               <h2 className="text-3xl font-semibold">{data.name}</h2>

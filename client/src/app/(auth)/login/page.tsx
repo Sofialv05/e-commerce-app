@@ -8,7 +8,7 @@ export default function Login() {
         <div className="card-title ">
           <h1>Login</h1>
         </div>
-        <form className="card-body justify-center" action={loginAction}>
+        <form className="card-body justify-center gap-2" action={loginAction}>
           <input
             type="email"
             name="email"
@@ -21,12 +21,15 @@ export default function Login() {
             placeholder="password"
             className="input input-bordered w-full max-w-xs"
           />
-          <button type="submit" className="btn">
+          <button type="submit" className="btn mt-6">
             Login
           </button>
         </form>
         <div>
-          <Link href={"/register"} className="ext-sm font-light text-gray-500 ">
+          <Link
+            href={"/register"}
+            className="text-sm font-light text-gray-500 "
+          >
             Not Registered?{" "}
             <span className="font-medium text-primary-600 hover:underline ">
               Create an account
